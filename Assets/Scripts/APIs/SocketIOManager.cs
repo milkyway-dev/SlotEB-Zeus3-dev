@@ -58,7 +58,7 @@ public class SocketIOManager : MonoBehaviour
     private void Start()
     {
         //OpenWebsocket();
-        OpenSocket();
+        //OpenSocket();
     }
 
     void ReceiveAuthToken(string jsonData)
