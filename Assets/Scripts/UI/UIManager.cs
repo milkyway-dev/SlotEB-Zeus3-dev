@@ -10,11 +10,21 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject MainPopup_Object;
 
+    [Header("Main Screen Buttons")]
+    [SerializeField]
+    private Button SlotStart_Button;
+    [SerializeField]
+    private Button BetPlus_Button;
+    [SerializeField]
+    private Button BetMinus_Button;
+
     [Header("Paytable Popup")]
     [SerializeField]
     private Button Info_button;
     [SerializeField]
     private GameObject PaytablePopup_Object;
+    [SerializeField]
+    private RectTransform PaytablePopup_Transform;
     [SerializeField]
     private Button PaytableExit_Button;
     [SerializeField]
@@ -138,53 +148,6 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Button CrossQuit_Button;
 
-    [Header("Squirrel Animation")]
-    [SerializeField]
-    private GameObject SquirrelStanding_Object;
-    [SerializeField]
-    private GameObject SquirrelCoins_Object;
-
-    [Header("KTR Elements")]
-    [SerializeField]
-    private GameObject SlotMainKTR_Object;
-    [SerializeField]
-    private GameObject FGSetupKTR_Object;
-    [SerializeField]
-    private GameObject ButtonSetupKTR_Object;
-    [SerializeField]
-    private TMP_Text TotalBetKTR_Text;
-    [SerializeField]
-    private TMP_Text BonusWinKTR_Text;
-    [SerializeField]
-    private TMP_Text FreeSpinKTR_Text;
-    [SerializeField]
-    private GameObject SlotBgSetupKTR_Object;
-
-    [Header("Normal Elements")]
-    [SerializeField]
-    private GameObject SlotMain_Object;
-    [SerializeField]
-    private GameObject FGSetup_Object;
-    [SerializeField]
-    private GameObject ButtonSetup_Object;
-    [SerializeField]
-    private GameObject SlotBGSetup_Object;
-
-    [Header("Locker Setup")]
-    [SerializeField]
-    private GameObject LockerMain_Object;
-    [SerializeField]
-    private GameObject LockerOpen_Object;
-    [SerializeField]
-    private GameObject LockerClose_Object;
-
-    [Header("Bonus Routine Text")]
-    [SerializeField]
-    private TMP_Text BonusRoutine_Text;
-    [SerializeField]
-    private GameObject BonusRoutine_GameObject;
-    private Tween BonusTextTween = null;
-
     [SerializeField]
     private AudioController audioController;
 
@@ -245,11 +208,21 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+
+        if (SlotStart_Button) SlotStart_Button.onClick.RemoveAllListeners();
+        if (SlotStart_Button) SlotStart_Button.onClick.AddListener(delegate { StartSlots(); });
+
+        if (BetPlus_Button) BetPlus_Button.onClick.RemoveAllListeners();
+        if (BetPlus_Button) BetPlus_Button.onClick.AddListener(delegate { ChangeBet(true); });
+
+        if (BetMinus_Button) BetMinus_Button.onClick.RemoveAllListeners();
+        if (BetMinus_Button) BetMinus_Button.onClick.AddListener(delegate { ChangeBet(false); });
+
         if (Info_button) Info_button.onClick.RemoveAllListeners();
-        if (Info_button) Info_button.onClick.AddListener(delegate { screenCounter = 1; ChangePage(false); OpenPopup(PaytablePopup_Object); });
+        if (Info_button) Info_button.onClick.AddListener(delegate { screenCounter = 1; ChangePage(false); OpenPaytable(); });
 
         if (PaytableExit_Button) PaytableExit_Button.onClick.RemoveAllListeners();
-        if (PaytableExit_Button) PaytableExit_Button.onClick.AddListener(delegate { ClosePopup(PaytablePopup_Object); });
+        if (PaytableExit_Button) PaytableExit_Button.onClick.AddListener(ClosePaytable);
 
         if (Right_Button) Right_Button.onClick.RemoveAllListeners();
         if (Right_Button) Right_Button.onClick.AddListener(delegate { ChangePage(true); });
@@ -304,6 +277,29 @@ public class UIManager : MonoBehaviour
         if (Music_Button) Music_Button.onClick.RemoveAllListeners();
         if (Music_Button) Music_Button.onClick.AddListener(ToggleMusic);
 
+    }
+
+    private void StartSlots()
+    {
+        if (slotManager) slotManager.StartSlots();
+    }
+
+    private void ChangeBet(bool IncDec)
+    {
+        if (slotManager) slotManager.ChangeBet(IncDec);
+    }
+
+    internal void ToggleButtonGrp(bool toggle)
+    {
+        if (SlotStart_Button) SlotStart_Button.interactable = toggle;
+        if (BetMinus_Button) BetMinus_Button.interactable = toggle;
+        if (BetPlus_Button) BetPlus_Button.interactable = toggle;
+        if (Settings_Button) Settings_Button.interactable = toggle;
+    }
+
+    internal void ToggleStartButton(bool toggy)
+    {
+        if (SlotStart_Button) SlotStart_Button.interactable = toggy;
     }
 
     private void ChangePage(bool Increment)
@@ -368,125 +364,6 @@ public class UIManager : MonoBehaviour
         }
 
         StartPopupAnim(amount);
-    }
-
-    internal void FreeSpinProcessStart(int spins, double totalbet, bool isUpdate = false)
-    {
-        if (isUpdate)
-        {
-            ToggleKTR(true);
-            if (TotalBetKTR_Text) TotalBetKTR_Text.text = totalbet.ToString();
-            if (BonusWinKTR_Text) BonusWinKTR_Text.text = "0.00";
-        }
-        if (FreeSpinKTR_Text) FreeSpinKTR_Text.text = spins.ToString();
-        ShowPopupProcess(spins, isUpdate);
-    }
-
-    internal void UpdateUI(int freeSpins, double CurrentWin)
-    {
-        BonusWin += CurrentWin;
-        if (FreeSpinKTR_Text) FreeSpinKTR_Text.text = freeSpins.ToString();
-        if (BonusWinKTR_Text) BonusWinKTR_Text.text = BonusWin.ToString();
-    }
-
-    internal void FreeSpinProcessStop()
-    {
-        if (FSComplete_Image) FSComplete_Image.color = new Color(FSComplete_Image.color.r, FSComplete_Image.color.g, FSComplete_Image.color.b, 0f);
-        if (FSComplete_Text) FSComplete_Text.color = new Color(FSComplete_Text.color.r, FSComplete_Text.color.g, FSComplete_Text.color.b, 0f);
-        if (FSNum_Text) FSNum_Text.color = new Color(FSNum_Text.color.r, FSNum_Text.color.g, FSNum_Text.color.b, 0f);
-        if (FSNum_Text) FSNum_Text.text = BonusWinKTR_Text.text;
-        if (FreeSpinCompletePopup_Object) FreeSpinCompletePopup_Object.SetActive(true);
-        if (MainPopup_Object) MainPopup_Object.SetActive(true);
-        if (FSComplete_Image) FSComplete_Image.DOFade(1f, 1f);
-        if (FSComplete_Text) FSComplete_Text.DOFade(1f, 1f);
-        if (FSNum_Text) FSNum_Text.DOFade(1f, 1f);
-        DOVirtual.DelayedCall(4f, () =>
-        {
-            if (FreeSpinCompletePopup_Object) FreeSpinCompletePopup_Object.SetActive(false);
-            if (MainPopup_Object) MainPopup_Object.SetActive(false);
-            ToggleKTR(false);
-            if (audioController) audioController.SwitchBGSound(false);
-        });
-    }
-
-    internal void ToggleBonusRText(bool isActive)
-    {
-        if (isActive)
-        {
-            if (BonusRoutine_GameObject) BonusRoutine_GameObject.SetActive(true);
-            if (BonusRoutine_Text) BonusTextTween = BonusRoutine_Text.DOFade(0f, 2f).SetLoops(-1, LoopType.Yoyo);
-        }
-        else
-        {
-            BonusTextTween.Kill();
-            if (BonusRoutine_GameObject) BonusRoutine_GameObject.SetActive(false);
-        }
-    }
-
-    private void ShowPopupProcess(int freeSpins, bool isBegin)
-    {
-        float time = 2f;
-        if(isBegin)
-        {
-            time = 5f;
-        }
-        if (FS_Text) FS_Text.text = "You have been awarded with <size=100><color=green>" + freeSpins + "</color></size> extra free spins";
-        if (FS_Image) FS_Image.color = FS_Image.color = new Color(FS_Image.color.r, FS_Image.color.g, FS_Image.color.b, 1f); 
-        if (FSTitle_Image) FSTitle_Image.color = FSTitle_Image.color = new Color(FSTitle_Image.color.r, FSTitle_Image.color.g, FSTitle_Image.color.b, 1f); 
-        if (FS_Text) FS_Text.color = FS_Text.color = new Color(FS_Text.color.r, FS_Text.color.g, FS_Text.color.b, 1f);
-        if (MainPopup_Object) MainPopup_Object.SetActive(true);
-        if (FreeSpinPopup_Object) FreeSpinPopup_Object.SetActive(true);
-        DOVirtual.DelayedCall(time, () =>
-        {
-            if (FS_Image) FS_Image.DOFade(0f, 1f).OnComplete(delegate
-            {
-                if (MainPopup_Object) MainPopup_Object.SetActive(false);
-                if (FreeSpinPopup_Object) FreeSpinPopup_Object.SetActive(false);
-            });
-            if (FSTitle_Image) FSTitle_Image.DOFade(0f, 1f);
-            if (FS_Text) FS_Text.DOFade(0f, 1f);
-        });
-    }
-
-    private void ToggleKTR(bool isActive)
-    {
-        if (audioController) audioController.PlayBonusAudio("vault");
-        if (isActive)
-        {
-            if (LockerMain_Object) LockerMain_Object.SetActive(true);
-            if (LockerOpen_Object) LockerOpen_Object.SetActive(true);
-            if (SlotMainKTR_Object) SlotMainKTR_Object.SetActive(true);
-            if (FGSetupKTR_Object) FGSetupKTR_Object.SetActive(true);
-            if (SlotBgSetupKTR_Object) SlotBgSetupKTR_Object.SetActive(true);
-            if (ButtonSetupKTR_Object) ButtonSetupKTR_Object.SetActive(true);
-            if (SlotMain_Object) SlotMain_Object.SetActive(false);
-            if (FGSetup_Object) FGSetup_Object.SetActive(false);
-            if (ButtonSetup_Object) ButtonSetup_Object.SetActive(false);
-            if (SlotBGSetup_Object) SlotBGSetup_Object.SetActive(false);
-            DOVirtual.DelayedCall(2f, () =>
-            {
-                if (LockerOpen_Object) LockerOpen_Object.SetActive(false);
-                if (LockerMain_Object) LockerMain_Object.SetActive(false);
-            });
-        }
-        else
-        {
-            if (LockerMain_Object) LockerMain_Object.SetActive(true);
-            if (LockerClose_Object) LockerClose_Object.SetActive(true);
-            if (SlotMainKTR_Object) SlotMainKTR_Object.SetActive(false);
-            if (FGSetupKTR_Object) FGSetupKTR_Object.SetActive(false);
-            if (ButtonSetupKTR_Object) ButtonSetupKTR_Object.SetActive(false);
-            if (SlotMain_Object) SlotMain_Object.SetActive(true);
-            if (FGSetup_Object) FGSetup_Object.SetActive(true);
-            if (ButtonSetup_Object) ButtonSetup_Object.SetActive(true);
-            if (SlotBGSetup_Object) SlotBGSetup_Object.SetActive(true);
-            if (SlotBgSetupKTR_Object) SlotBgSetupKTR_Object.SetActive(false);
-            DOVirtual.DelayedCall(2f, () =>
-            {
-                if (LockerClose_Object) LockerClose_Object.SetActive(false);
-                if (LockerMain_Object) LockerMain_Object.SetActive(false);
-            });
-        }
     }
 
     private void StartPopupAnim(double amount)
@@ -566,6 +443,21 @@ public class UIManager : MonoBehaviour
         slotManager.CallCloseSocket();
     }
 
+    private void OpenPaytable()
+    {
+        if (PaytablePopup_Transform) PaytablePopup_Transform.localPosition = new Vector2(PaytablePopup_Transform.localPosition.x, -1085);
+        OpenPopup(PaytablePopup_Object);
+        if (PaytablePopup_Transform) PaytablePopup_Transform.DOLocalMoveY(-21, 0.5f);
+    }
+
+    private void ClosePaytable()
+    {
+        if (PaytablePopup_Transform) PaytablePopup_Transform.DOLocalMoveY(-1085, 0.5f).OnComplete(delegate
+        {
+            ClosePopup(PaytablePopup_Object);
+        });
+    }
+
     private void OpenPopup(GameObject Popup)
     {
         if (audioController) audioController.PlayButtonAudio();
@@ -621,20 +513,6 @@ public class UIManager : MonoBehaviour
             if (SoundOff_Object) SoundOff_Object.SetActive(true);
             if(audioController) audioController.ToggleMute(true,"button");
             if (audioController) audioController.ToggleMute(true,"wl");
-        }
-    }
-
-    internal void ToggleSquirrel(bool isActive)
-    {
-        if (!isActive)
-        {
-            if (SquirrelCoins_Object) SquirrelCoins_Object.SetActive(true);
-            if (SquirrelStanding_Object) SquirrelStanding_Object.SetActive(false);
-        }
-        else
-        {
-            if (SquirrelCoins_Object) SquirrelCoins_Object.SetActive(false);
-            if (SquirrelStanding_Object) SquirrelStanding_Object.SetActive(true);
         }
     }
 }
