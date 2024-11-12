@@ -690,7 +690,7 @@ TextureImporter:
         width: 174
         height: 123
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -711,7 +711,7 @@ TextureImporter:
         width: 174
         height: 123
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -732,7 +732,7 @@ TextureImporter:
         width: 439
         height: 127
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -753,7 +753,7 @@ TextureImporter:
         width: 452
         height: 132
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -761,6 +761,300 @@ TextureImporter:
       bones: []
       spriteID: ec216119775904bb39dae996708a45cd
       internalID: -1909889407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Popup_BG
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 1887
+        width: 1488
+        height: 1092
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 258e642ca80a8447ab58d5781b4e3200
+      internalID: -720844701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Off_Normal
+      rect:
+        serializedVersion: 2
+        x: 3124
+        y: 1664
+        width: 178
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f52fd8e916184de892edb8df679411f
+      internalID: 1679727522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Off_Hover
+      rect:
+        serializedVersion: 2
+        x: 3133
+        y: 1469
+        width: 178
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad9da3d4ff08b4e599a127e6bd9f1a5a
+      internalID: 475832587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Off_Pressed
+      rect:
+        serializedVersion: 2
+        x: 3133
+        y: 1289
+        width: 178
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d03c4fb78af6241e2836f782936d5a20
+      internalID: -100296966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: On_Normal
+      rect:
+        serializedVersion: 2
+        x: 3375
+        y: 1658
+        width: 178
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84bebfa9959ea455fa1ef859e8f98b8f
+      internalID: 1261950820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: On_Hover
+      rect:
+        serializedVersion: 2
+        x: 3377
+        y: 1467
+        width: 178
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c11ec341a9ee477b95b314ef0a4ab8f
+      internalID: -1190444519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: On_Pressed
+      rect:
+        serializedVersion: 2
+        x: 3397
+        y: 1290
+        width: 178
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 019ce376fd80f40e19cbfa4ff504e219
+      internalID: -2123146763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalButton
+      rect:
+        serializedVersion: 2
+        x: 2206
+        y: 453
+        width: 339
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf356511889624285a9dc18e755fa793
+      internalID: 737554113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PressedButton
+      rect:
+        serializedVersion: 2
+        x: 2206
+        y: 250
+        width: 339
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 613b1bc4052534efbbd4ed72c65c7681
+      internalID: -795550715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HoverButton
+      rect:
+        serializedVersion: 2
+        x: 2206
+        y: 50
+        width: 339
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d1e96543c797411ab00a0417c641682
+      internalID: -330341503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoundBG
+      rect:
+        serializedVersion: 2
+        x: 3645
+        y: 1562
+        width: 353
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f58d43aa246f14b61ad8c9ff69b826e6
+      internalID: -254974118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SettingsNormal
+      rect:
+        serializedVersion: 2
+        x: 2054
+        y: 1149
+        width: 188
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aae221643734457eb31e8d520bb8cf3
+      internalID: -1215978384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SettingsPressed
+      rect:
+        serializedVersion: 2
+        x: 2295
+        y: 1156
+        width: 188
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e6d7aa248bc14b48bfe3af26ce48d25
+      internalID: -605273646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SettingsHover
+      rect:
+        serializedVersion: 2
+        x: 2513
+        y: 1156
+        width: 188
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cbd2a5b0b8954dd8a9e59a093cf26b7
+      internalID: 1051366657
       vertices: []
       indices: 
       edges: []
@@ -786,6 +1080,7 @@ TextureImporter:
       ButtonBG: 122913943
       CloseNormal: -1909889407
       ClosePressed: -1982263284
+      HoverButton: -330341503
       InfoBG: 1954965476
       InfoDisable: 1736255764
       InfoHover: -1842554381
@@ -797,6 +1092,13 @@ TextureImporter:
       MinusPressed: -1383451017
       NavArr: 1082447957
       NavArrPressed: 628550759
+      NormalButton: 737554113
+      Off_Hover: 475832587
+      Off_Normal: 1679727522
+      Off_Pressed: -100296966
+      On_Hover: -1190444519
+      On_Normal: 1261950820
+      On_Pressed: -2123146763
       PlayDisable: -480399400
       PlayHover: 1317431403
       PlayNormal: -1996793822
@@ -804,6 +1106,12 @@ TextureImporter:
       PlusHover: 1822468917
       PlusNormal: -696252443
       PlusPressed: 1980964965
+      Popup_BG: -720844701
+      PressedButton: -795550715
+      SettingsHover: 1051366657
+      SettingsNormal: -1215978384
+      SettingsPressed: -605273646
+      SoundBG: -254974118
       TotalBetBG: 1652925147
       WinBG: 1088023156
   mipmapLimitGroupName: 

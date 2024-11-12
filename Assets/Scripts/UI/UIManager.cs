@@ -102,18 +102,6 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Image FSComplete_Image;
 
-    [Header("Splash Screen")]
-    [SerializeField]
-    private GameObject Loading_Object;
-    [SerializeField]
-    private Image Loading_Image;
-    [SerializeField]
-    private TMP_Text Loading_Text;
-    [SerializeField]
-    private TMP_Text LoadPercent_Text;
-    [SerializeField]
-    private Button QuitSplash_button;
-
     [Header("Disconnection Popup")]
     [SerializeField]
     private Button CloseDisconnect_Button;
@@ -137,6 +125,35 @@ public class UIManager : MonoBehaviour
     private Button LBExit_Button;
     [SerializeField]
     private GameObject LBPopup_Object;
+
+    [Header("Flip Animation")]
+    [SerializeField]
+    private Sprite Flip_Sprite;
+    [SerializeField]
+    private Sprite Normal_Sprite;
+    [SerializeField]
+    private Image Slot_Image;
+    [SerializeField]
+    private RectTransform Slot_Transform;
+    [SerializeField]
+    private RectTransform BG_Transform;
+    [SerializeField]
+    private GameObject MainSlot_Object;
+    [SerializeField]
+    private GameObject MainFlipObject;
+    [SerializeField]
+    private RectTransform LinesText_Transform;
+    [SerializeField]
+    private RectTransform ButtonBG_Transform;
+    [SerializeField]
+    private RectTransform FlipButtonBG_Transform;
+    [SerializeField]
+    private Image NormalBG_Image;
+    [SerializeField]
+    private Image ZeusTitle_Image;
+    [SerializeField]
+    private Image ZeusFlip_Image;
+    private bool isFlip = false;
 
     [Header("Quit Popup")]
     [SerializeField]
@@ -170,40 +187,6 @@ public class UIManager : MonoBehaviour
     {
         //if (Loading_Object) Loading_Object.SetActive(true);
         //StartCoroutine(LoadingRoutine());
-    }
-
-    private IEnumerator LoadingRoutine()
-    {
-        StartCoroutine(LoadingTextAnimate());
-        float imageFill = 0f;
-        DOTween.To(() => imageFill, (val) => imageFill = val, 0.7f, 2f).OnUpdate(() =>
-        {
-            if (Loading_Image) Loading_Image.fillAmount = imageFill;
-            if (LoadPercent_Text) LoadPercent_Text.text = (100 * imageFill).ToString("f0") + "%";
-        });
-        yield return new WaitForSecondsRealtime(2);
-        yield return new WaitUntil(() => socketManager.isLoaded);
-        DOTween.To(() => imageFill, (val) => imageFill = val, 1, 1f).OnUpdate(() =>
-        {
-            if (Loading_Image) Loading_Image.fillAmount = imageFill;
-            if (LoadPercent_Text) LoadPercent_Text.text = (100 * imageFill).ToString("f0") + "%";
-        });
-        yield return new WaitForSecondsRealtime(1f);
-        if (Loading_Object) Loading_Object.SetActive(false);
-        StopCoroutine(LoadingTextAnimate());
-    }
-
-    private IEnumerator LoadingTextAnimate()
-    {
-        while (true)
-        {
-            if (Loading_Text) Loading_Text.text = "Loading.";
-            yield return new WaitForSeconds(1f);
-            if (Loading_Text) Loading_Text.text = "Loading..";
-            yield return new WaitForSeconds(1f);
-            if (Loading_Text) Loading_Text.text = "Loading...";
-            yield return new WaitForSeconds(1f);
-        }
     }
 
     private void Start()
@@ -263,9 +246,6 @@ public class UIManager : MonoBehaviour
         if (CloseAD_Button) CloseAD_Button.onClick.RemoveAllListeners();
         if (CloseAD_Button) CloseAD_Button.onClick.AddListener(CallOnExitFunction);
 
-        if (QuitSplash_button) QuitSplash_button.onClick.RemoveAllListeners();
-        if (QuitSplash_button) QuitSplash_button.onClick.AddListener(delegate { OpenPopup(QuitPopup_Object); });
-
         if (audioController) audioController.ToggleMute(false);
 
         isMusic = true;
@@ -276,7 +256,6 @@ public class UIManager : MonoBehaviour
 
         if (Music_Button) Music_Button.onClick.RemoveAllListeners();
         if (Music_Button) Music_Button.onClick.AddListener(ToggleMusic);
-
     }
 
     private void StartSlots()
@@ -492,9 +471,89 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void UrlButtons(string url)
+    private void Update()
     {
-        Application.OpenURL(url);
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            FlipSlot();
+        }
+    }
+
+    private void FlipSlot()
+    {
+        if (!isFlip)
+        {
+            isFlip = true;
+            if (BG_Transform) BG_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.4f).OnComplete(delegate
+            {
+                if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
+                {
+                    if (Slot_Image) Slot_Image.sprite = Flip_Sprite;
+                    if (MainSlot_Object) MainSlot_Object.SetActive(false);
+                    if (MainFlipObject) MainFlipObject.SetActive(true);
+                    if (LinesText_Transform) LinesText_Transform.localEulerAngles = new Vector3(0, 180, 0);
+                    if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 180, 0), 0.5f).OnComplete(delegate
+                    {
+                        if (BG_Transform) BG_Transform.DOScale(Vector3.one, 0.4f);
+                    });
+
+                });
+            });
+            if (Slot_Transform) Slot_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.4f).OnComplete(delegate
+            {
+                if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
+                {
+                    if (FlipButtonBG_Transform) FlipButtonBG_Transform.gameObject.SetActive(true);
+                    if (FlipButtonBG_Transform) FlipButtonBG_Transform.DOLocalMoveX(669, 0.5f);
+                    if (ButtonBG_Transform) ButtonBG_Transform.DOLocalMoveX(-1900, 0.5f).OnComplete(delegate { if (ButtonBG_Transform) ButtonBG_Transform.gameObject.SetActive(false); });
+                    if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 180, 0), 0.5f).OnComplete(delegate
+                    {
+                        if (Slot_Transform) Slot_Transform.DOScale(Vector3.one, 0.4f);
+                    });
+
+                });
+            });
+            if (NormalBG_Image) NormalBG_Image.DOFade(0f, 1f).OnComplete(delegate { NormalBG_Image.gameObject.SetActive(false); });
+            if (ZeusTitle_Image) ZeusTitle_Image.DOFade(0f, 1f);
+            if (ZeusFlip_Image) ZeusFlip_Image.DOFade(1f, 1f);
+        }
+        else
+        {
+            isFlip = false;
+            if (BG_Transform) BG_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.4f).OnComplete(delegate
+            {
+                if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
+                {
+                    if (Slot_Image) Slot_Image.sprite = Normal_Sprite;
+                    if (MainSlot_Object) MainSlot_Object.SetActive(true);
+                    if (MainFlipObject) MainFlipObject.SetActive(false);
+                    if (LinesText_Transform) LinesText_Transform.localEulerAngles = new Vector3(0, 0, 0);
+                    if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 0, 0), 0.5f).OnComplete(delegate
+                    {
+                        if (BG_Transform) BG_Transform.DOScale(Vector3.one, 0.4f);
+                    });
+
+                });
+            });
+            if (Slot_Transform) Slot_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.4f).OnComplete(delegate
+            {
+                if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
+                {
+                    if (ButtonBG_Transform) ButtonBG_Transform.gameObject.SetActive(true);
+                    if (ButtonBG_Transform) ButtonBG_Transform.DOLocalMoveX(-489, 0.5f);
+                    if (FlipButtonBG_Transform) FlipButtonBG_Transform.DOLocalMoveX(1900, 0.5f).OnComplete(delegate { if (FlipButtonBG_Transform) FlipButtonBG_Transform.gameObject.SetActive(false); });
+                    if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 0, 0), 0.5f).OnComplete(delegate
+                    {
+                        if (Slot_Transform) Slot_Transform.DOScale(Vector3.one, 0.4f);
+                    });
+
+                });
+            });
+            if (NormalBG_Image) NormalBG_Image.gameObject.SetActive(true);
+            if (NormalBG_Image) NormalBG_Image.DOFade(1f, 1f);
+            if (ZeusTitle_Image) ZeusTitle_Image.DOFade(1f, 1f);
+            if (ZeusFlip_Image) ZeusFlip_Image.DOFade(0f, 1f);
+        }
     }
 
     private void ToggleSound()
