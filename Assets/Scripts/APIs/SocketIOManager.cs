@@ -37,8 +37,8 @@ public class SocketIOManager : MonoBehaviour
     [SerializeField]
     private string testToken;
 
-    protected string gameID = "SL-SR";
-    //protected string gameID = "";
+    //protected string gameID = "SL-SR";
+    protected string gameID = "";
 
     internal bool isLoaded = false;
 
@@ -57,8 +57,7 @@ public class SocketIOManager : MonoBehaviour
 
     private void Start()
     {
-        //OpenWebsocket();
-        //OpenSocket();
+        OpenSocket();
     }
 
     void ReceiveAuthToken(string jsonData)
@@ -274,11 +273,11 @@ public class SocketIOManager : MonoBehaviour
                     initialData = myData.message.GameData;
                     initUIData = myData.message.UIData;
                     playerdata = myData.message.PlayerData;
-                    LineData = myData.message.GameData.Lines;
+                    LineData = myData.message.GameData.linesApiData;
                     if (!SetInit)
                     {
                         Debug.Log(jsonObject);
-                        List<string> LinesString = ConvertListListIntToListString(initialData.Lines);
+                        List<string> LinesString = ConvertListListIntToListString(initialData.linesApiData);
                         PopulateSlotSocket(LinesString);
                         SetInit = true;
                     }
@@ -338,7 +337,7 @@ public class SocketIOManager : MonoBehaviour
         message.data = new BetData();
         message.data.currentBet = currBet;
         message.data.spins = 1;
-        message.data.currentLines = 100;
+        message.data.currentLines = 192;
         message.id = "SPIN";
         // Serialize message data to JSON
         string json = JsonUtility.ToJson(message);
@@ -449,7 +448,7 @@ public class InitData
 [Serializable]
 public class GameData
 {
-    public List<List<int>> Lines { get; set; }
+    public List<List<int>> linesApiData { get; set; }
     public List<double> Bets { get; set; }
     public List<List<string>> ResultReel { get; set; }
     public List<int> linesToEmit { get; set; }
