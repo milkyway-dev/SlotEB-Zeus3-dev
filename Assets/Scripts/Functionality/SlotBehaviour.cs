@@ -117,14 +117,9 @@ public class SlotBehaviour : MonoBehaviour
     //Fetch Lines from backend
     internal void FetchLines(string LineVal, int count)
     {
-        y_string.Add(count + 1, LineVal);
+        y_string.Add(count, LineVal);
     }
 
-    //Destroy Static Lines from button hovers
-    internal void DestroyStaticLine()
-    {
-        PayCalculator.ResetStaticLine();
-    }
     #endregion
 
 
@@ -409,9 +404,9 @@ public class SlotBehaviour : MonoBehaviour
         //    uiManager.UpdateUI(FreeSpinCounter, SocketManager.playerdata.currentWining);
         //}
 
-        //if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("f2");
+        if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("f2");
 
-        //currentBalance = SocketManager.playerdata.Balance;
+        currentBalance = SocketManager.playerdata.Balance;
 
         //if (SocketManager.resultData.bonusData.isBonus)
         //{
@@ -546,6 +541,7 @@ public class SlotBehaviour : MonoBehaviour
             }
 
             WinningsAnim(true);
+            PayCalculator.StartLinesRoutine();
         }
         else
         {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7145726538770123845}
   - component: {fileID: 3265530180553089606}
   m_Layer: 5
-  m_Name: WinLine
+  m_Name: WinLine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Resolution: 10
   m_useNativeSize: 0
   m_points:
-  - {x: -115, y: 0}
+  - {x: -115, y: -137}
   lineThickness: 20
   relativeSize: 0
   lineList: 0
