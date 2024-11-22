@@ -151,11 +151,6 @@ public class SlotBehaviour : MonoBehaviour
         if (currentBalance < currentTotalBet)
         {
             uiManager.LowBalPopup();
-            if (uiManager) uiManager.ToggleStartButton(false);
-        }
-        else
-        {
-            if (uiManager) uiManager.ToggleStartButton(true);
         }
     }
 
@@ -503,6 +498,7 @@ public class SlotBehaviour : MonoBehaviour
         if (currentBalance < currentTotalBet && !IsFreeSpin) 
         {
             CompareBalance();
+            StopAutoSpin();
             yield return new WaitForSeconds(1);
             ToggleButtonGrp(true);
             yield break;

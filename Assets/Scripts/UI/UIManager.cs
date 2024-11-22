@@ -176,14 +176,6 @@ public class UIManager : MonoBehaviour
     private bool isMusic = true;
     private bool isSound = true;
     private bool isExit = false;
-    private double BonusWin = 0;
-
-
-    private void Awake()
-    {
-        //if (Loading_Object) Loading_Object.SetActive(true);
-        //StartCoroutine(LoadingRoutine());
-    }
 
     private void Start()
     {
