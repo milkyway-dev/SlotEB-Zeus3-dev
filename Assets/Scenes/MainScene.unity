@@ -17513,10 +17513,7 @@ MonoBehaviour:
   - {fileID: 309059558}
   - {fileID: 1269458019}
   - {fileID: 719591087}
-  KTR_Text: {fileID: 0}
-  Scatter_Text: {fileID: 0}
-  TFC_Text: {fileID: 0}
-  Wild_Text: {fileID: 0}
+  Scatter_Text: {fileID: 534419911}
   Right_Button: {fileID: 446433759}
   Left_Button: {fileID: 1867067655}
   Info_Screens:
@@ -17552,10 +17549,6 @@ MonoBehaviour:
   FSWin_Text: {fileID: 242372168}
   CloseDisconnect_Button: {fileID: 1540852685}
   DisconnectPopup_Object: {fileID: 1192722803}
-  CloseAD_Button: {fileID: 0}
-  ADPopup_Object: {fileID: 0}
-  reconnect_Text: {fileID: 111555629}
-  ReconnectPopup_Object: {fileID: 0}
   LBExit_Button: {fileID: 1042341366}
   LBPopup_Object: {fileID: 1802858814}
   Flip_Sprite: {fileID: 1890561646, guid: e1049e542686043829f63523bb1e8f61, type: 3}

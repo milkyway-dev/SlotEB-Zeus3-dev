@@ -3,7 +3,6 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class UIManager : MonoBehaviour
 {
@@ -383,9 +382,34 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < paylines.symbols.Count; i++)
         {
-            if (paylines.symbols[i].Name.ToUpper() == "SCATTER")
+            if (paylines.symbols[i].Name.ToUpper() == "FREESPIN")
             {
-                if (Scatter_Text) Scatter_Text.text = paylines.symbols[i].description.ToString();
+                string text = null;
+                if (paylines.symbols[i].Multiplier[0][1] != 0)
+                {
+                    text += "5 = " + "<color=yellow>" + paylines.symbols[i].Multiplier[0][1] + " Free Spins</color>";
+                }
+                if (paylines.symbols[i].Multiplier[0][0] != 0)
+                {
+                    text += "<color=yellow> + " + paylines.symbols[i].Multiplier[0][0] + "x Total Bet</color>";
+                }
+                if (paylines.symbols[i].Multiplier[1][1] != 0)
+                {
+                    text += "\n4 = " + "<color=yellow>" + paylines.symbols[i].Multiplier[1][1] + " Free Spins</color>";
+                }
+                if (paylines.symbols[i].Multiplier[1][0] != 0)
+                {
+                    text += "<color=yellow> + " + paylines.symbols[i].Multiplier[1][0] + "x Total Bet</color>";
+                }
+                if (paylines.symbols[i].Multiplier[2][1] != 0)
+                {
+                    text += "\n3 = " + "<color=yellow>" + paylines.symbols[i].Multiplier[2][1] + " Free Spins</color>";
+                }
+                if (paylines.symbols[i].Multiplier[2][0] != 0)
+                {
+                    text += "<color=yellow> + " + paylines.symbols[i].Multiplier[2][0] + "x Total Bet</color>";
+                }
+                if (Scatter_Text) Scatter_Text.text = text;
             }
         }
     }
