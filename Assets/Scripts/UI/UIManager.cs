@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class UIManager : MonoBehaviour
 {
@@ -30,15 +31,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TMP_Text[] SymbolsText;
     [SerializeField]
-    private TMP_Text[] KTRSymbolsText;
-    [SerializeField]
-    private TMP_Text KTR_Text;
-    [SerializeField]
     private TMP_Text Scatter_Text;
-    [SerializeField]
-    private TMP_Text TFC_Text;
-    [SerializeField]
-    private TMP_Text Wild_Text;
     [SerializeField]
     private Button Right_Button;
     [SerializeField]
@@ -70,55 +63,47 @@ public class UIManager : MonoBehaviour
 
     [Header("Win Popup")]
     [SerializeField]
-    private Sprite BigWin_Sprite;
+    private GameObject BigWinPopup_Object;
     [SerializeField]
-    private Sprite HugeWin_Sprite;
+    private RectTransform BigWin_Transform;
     [SerializeField]
-    private Sprite MegaWin_Sprite;
+    private TMP_Text BigWin_Text;
     [SerializeField]
-    private Image Win_Image;
+    private Image BigWinFlash_Image;
     [SerializeField]
-    private GameObject WinPopup_Object;
-    [SerializeField]
-    private TMP_Text Win_Text;
+    private GameObject Star_Object;
 
-    [Header("Free Spin Popup")]
+    [Header("Free Spin Texts")]
     [SerializeField]
-    private GameObject FreeSpinPopup_Object;
+    private TMP_Text FSTotalBet_text;
     [SerializeField]
-    private TMP_Text FS_Text;
+    private TMP_Text FSRemaining_text;
     [SerializeField]
-    private Image FS_Image;
+    private TMP_Text FSTotalwin_text;
     [SerializeField]
-    private Image FSTitle_Image;
+    private TMP_Text FSInfo_text;
+    private double freespinWin = 0;
+
+    [Header("Extra free spin popup")]
+    [SerializeField]
+    private GameObject ExtraFSPanel_Object;
+    [SerializeField]
+    private RectTransform ExtraFSPopup_Transform;
+    [SerializeField]
+    private TMP_Text ExtraFS_Text;
+    private Tween ExtraFS_Tween;
 
     [Header("Free Spin Complete Popup")]
     [SerializeField]
-    private GameObject FreeSpinCompletePopup_Object;
+    private GameObject FSWinPopup_Object;
     [SerializeField]
-    private TMP_Text FSComplete_Text;
-    [SerializeField]
-    private TMP_Text FSNum_Text;
-    [SerializeField]
-    private Image FSComplete_Image;
+    private TMP_Text FSWin_Text;
 
     [Header("Disconnection Popup")]
     [SerializeField]
     private Button CloseDisconnect_Button;
     [SerializeField]
     private GameObject DisconnectPopup_Object;
-
-    [Header("AnotherDevice Popup")]
-    [SerializeField]
-    private Button CloseAD_Button;
-    [SerializeField]
-    private GameObject ADPopup_Object;
-
-    [Header("Reconnection Popup")]
-    [SerializeField]
-    private TMP_Text reconnect_Text;
-    [SerializeField]
-    private GameObject ReconnectPopup_Object;
 
     [Header("LowBalance Popup")]
     [SerializeField]
@@ -143,6 +128,18 @@ public class UIManager : MonoBehaviour
     private GameObject MainFlipObject;
     [SerializeField]
     private RectTransform LinesText_Transform;
+    [SerializeField]
+    private RectTransform GreenLinesText_Transform;
+    [SerializeField]
+    private RectTransform YellowLinesText_Transform;
+    [SerializeField]
+    private RectTransform PurpleLinesText_Transform;
+    [SerializeField]
+    private RectTransform RedLinesText_Transform;
+    [SerializeField]
+    private RectTransform WinLinesEnable_Transform;
+    [SerializeField]
+    private RectTransform WinLinesDisable_Transform;
     [SerializeField]
     private RectTransform ButtonBG_Transform;
     [SerializeField]
@@ -191,7 +188,6 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-
         if (SlotStart_Button) SlotStart_Button.onClick.RemoveAllListeners();
         if (SlotStart_Button) SlotStart_Button.onClick.AddListener(delegate { StartSlots(); });
 
@@ -243,9 +239,6 @@ public class UIManager : MonoBehaviour
         if (CloseDisconnect_Button) CloseDisconnect_Button.onClick.RemoveAllListeners();
         if (CloseDisconnect_Button) CloseDisconnect_Button.onClick.AddListener(CallOnExitFunction);
 
-        if (CloseAD_Button) CloseAD_Button.onClick.RemoveAllListeners();
-        if (CloseAD_Button) CloseAD_Button.onClick.AddListener(CallOnExitFunction);
-
         if (audioController) audioController.ToggleMute(false);
 
         isMusic = true;
@@ -283,6 +276,7 @@ public class UIManager : MonoBehaviour
 
     private void ChangePage(bool Increment)
     {
+        if (audioController) audioController.PlayButtonAudio();
         foreach (GameObject t in Info_Screens)
         {
             t.SetActive(false);
@@ -326,46 +320,36 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    internal void PopulateWin(int value, double amount)
+    internal void BigWinSequence(double amount)
     {
-        if (audioController) audioController.PlayWLAudio("megaWin");
-        switch (value)
+        double initAmount = 0;
+        if (BigWinPopup_Object) BigWinPopup_Object.SetActive(true);
+        if (BigWinFlash_Image) BigWinFlash_Image.DOFade(1f, 0.3f).OnComplete(delegate { BigWinFlash_Image.DOFade(0f, 0.3f); });
+        if (BigWin_Transform) BigWin_Transform.DOLocalMoveY(190, 0.3f).OnComplete(delegate
         {
-            case 1:
-                if (Win_Image) Win_Image.sprite = BigWin_Sprite;
-                break;
-            case 2:
-                if (Win_Image) Win_Image.sprite = HugeWin_Sprite;
-                break;
-            case 3:
-                if (Win_Image) Win_Image.sprite = MegaWin_Sprite;
-                break;
-        }
-
-        StartPopupAnim(amount);
-    }
-
-    private void StartPopupAnim(double amount)
-    {
-        int initAmount = 0;
-        if (WinPopup_Object) WinPopup_Object.SetActive(true);
-        if (MainPopup_Object) MainPopup_Object.SetActive(true);
-
-        DOTween.To(() => initAmount, (val) => initAmount = val, (int)amount, 5f).OnUpdate(() =>
-        {
-            if (Win_Text) Win_Text.text = initAmount.ToString();
+            if (Star_Object) Star_Object.SetActive(true);
+            DOTween.To(() => initAmount, (val) => initAmount = val, amount, 5f).OnUpdate(() =>
+            {
+                if (BigWin_Text) BigWin_Text.text = initAmount.ToString("f2");
+            }).OnComplete(delegate
+            {
+                DOVirtual.DelayedCall(2f, () =>
+                {
+                    if (BigWinPopup_Object) BigWinPopup_Object.SetActive(false);
+                    if (BigWin_Transform) BigWin_Transform.localPosition = new Vector3(BigWin_Transform.localPosition.x, 890, BigWin_Transform.localPosition.z);
+                    if (Star_Object) Star_Object.SetActive(false);
+                    if (BG_Transform) BG_Transform.DOScale(Vector3.one, 0.3f);
+                    if (Slot_Transform) Slot_Transform.DOScale(Vector3.one, 0.3f);
+                    if (WinLinesEnable_Transform) WinLinesEnable_Transform.DOScale(Vector3.one, 0.3f);
+                    if (WinLinesDisable_Transform) WinLinesDisable_Transform.DOScale(Vector3.one, 0.3f);
+                    if (slotManager) slotManager.CheckPopups = false;
+                });
+            });
         });
-
-        DOVirtual.DelayedCall(6f, () =>
-        {
-            ClosePopup(WinPopup_Object);
-            slotManager.CheckPopups = false;
-        });
-    }
-
-    internal void ADfunction()
-    {
-        OpenPopup(ADPopup_Object); 
+        if (BG_Transform) BG_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f);
+        if (Slot_Transform) Slot_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f);
+        if (WinLinesEnable_Transform) WinLinesEnable_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f);
+        if (WinLinesDisable_Transform) WinLinesDisable_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f);
     }
 
     internal void InitialiseUIData(Paylines symbolsText)
@@ -380,37 +364,28 @@ public class UIManager : MonoBehaviour
             string text = null;
             if (paylines.symbols[i].Multiplier[0][0] != 0)
             {
-                text += "5x = " + paylines.symbols[i].Multiplier[0][0];
+                text += paylines.symbols[i].Multiplier[0][0];
             }
             if (paylines.symbols[i].Multiplier[1][0] != 0)
             {
-                text += "\n4x = " + paylines.symbols[i].Multiplier[1][0];
+                text += "\n" + paylines.symbols[i].Multiplier[1][0];
             }
             if (paylines.symbols[i].Multiplier[2][0] != 0)
             {
-                text += "\n3x = " + paylines.symbols[i].Multiplier[2][0];
+                text += "\n" + paylines.symbols[i].Multiplier[2][0];
+            }
+            if (paylines.symbols[i].Multiplier[3][0] != 0)
+            {
+                text += "\n" + paylines.symbols[i].Multiplier[3][0];
             }
             if (SymbolsText[i]) SymbolsText[i].text = text;
-            if (KTRSymbolsText[i]) KTRSymbolsText[i].text = text;
         }
 
         for (int i = 0; i < paylines.symbols.Count; i++)
         {
-            if (paylines.symbols[i].Name.ToUpper() == "FREESPIN")
-            {
-                if (KTR_Text) KTR_Text.text = paylines.symbols[i].description.ToString();
-            }
             if (paylines.symbols[i].Name.ToUpper() == "SCATTER")
             {
                 if (Scatter_Text) Scatter_Text.text = paylines.symbols[i].description.ToString();
-            }
-            if (paylines.symbols[i].Name.ToUpper() == "BONUS")
-            {
-                if (TFC_Text) TFC_Text.text = paylines.symbols[i].description.ToString();
-            }
-            if (paylines.symbols[i].Name.ToUpper() == "WILD")
-            {
-                if (Wild_Text) Wild_Text.text = paylines.symbols[i].description.ToString();
             }
         }
     }
@@ -471,12 +446,56 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    internal void ExtraFSPopup(int freespincount)
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (ExtraFS_Text) ExtraFS_Text.text = "you have been awarded with extra free spins. total free spins left <color=yellow>" + freespincount + "</color>.";
+        if (ExtraFSPanel_Object) ExtraFSPanel_Object.SetActive(true);
+        if (ExtraFSPopup_Transform) ExtraFS_Tween = ExtraFSPopup_Transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.5f).SetLoops(-1, LoopType.Yoyo);
+        DOVirtual.DelayedCall(9f, () =>
         {
+            ExtraFS_Tween.Kill();
+            if (ExtraFSPopup_Transform) ExtraFSPopup_Transform.localScale = Vector3.one;
+            if (ExtraFSPanel_Object) ExtraFSPanel_Object.SetActive(false);
+        });
+    }
+
+    internal void FreeSpinProcessStart(int count, double totalBet)
+    {
+        if (FSRemaining_text) FSRemaining_text.text = count.ToString();
+        if (FSTotalBet_text) FSTotalBet_text.text = totalBet.ToString();
+        if (FSInfo_text) FSInfo_text.text = count + " Free spins remaining";
+        freespinWin = 0;
+        if (BG_Transform) BG_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.4f);
+        if (Slot_Transform) Slot_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.4f);
+    }
+
+    internal void FlipMySlot()
+    {
+        FlipSlot();
+        if (audioController) audioController.PlayWLAudio("Flip");
+        DOVirtual.DelayedCall(2f, () =>
+        {
+            slotManager.StartFreeSpinRoutine();
+        });
+    }
+
+    internal void UpdateUI(int count, double winning)
+    {
+        if (FSRemaining_text) FSRemaining_text.text = count.ToString();
+        freespinWin += winning; 
+        if (FSTotalwin_text) FSTotalwin_text.text = freespinWin.ToString();
+        if (FSInfo_text) FSInfo_text.text = count + " Free spins remaining";
+    }
+
+    internal void FreeSpinProcessStop()
+    {
+        if (FSWin_Text) FSWin_Text.text = freespinWin.ToString();
+        if (FSWinPopup_Object) FSWinPopup_Object.SetActive(true);
+        DOVirtual.DelayedCall(3f, () =>
+        {
+            if (FSWinPopup_Object) FSWinPopup_Object.SetActive(false);
             FlipSlot();
-        }
+        });
     }
 
     private void FlipSlot()
@@ -484,34 +503,34 @@ public class UIManager : MonoBehaviour
         if (!isFlip)
         {
             isFlip = true;
-            if (BG_Transform) BG_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.4f).OnComplete(delegate
+            if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
             {
-                if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
+                if (Slot_Image) Slot_Image.sprite = Flip_Sprite;
+                if (MainSlot_Object) MainSlot_Object.SetActive(false);
+                if (MainFlipObject) MainFlipObject.SetActive(true);
+                if (LinesText_Transform) LinesText_Transform.localEulerAngles = new Vector3(0, 180, 0);
+                if (GreenLinesText_Transform) GreenLinesText_Transform.localEulerAngles = new Vector3(0, 180, 0);
+                if (YellowLinesText_Transform) YellowLinesText_Transform.localEulerAngles = new Vector3(0, 180, 0);
+                if (PurpleLinesText_Transform) PurpleLinesText_Transform.localEulerAngles = new Vector3(0, 180, 0);
+                if (RedLinesText_Transform) RedLinesText_Transform.localEulerAngles = new Vector3(0, 180, 0);
+                if (WinLinesEnable_Transform) WinLinesEnable_Transform.localEulerAngles = new Vector3(0, 180, 0);
+                if (WinLinesDisable_Transform) WinLinesDisable_Transform.localEulerAngles = new Vector3(0, 180, 0);
+                if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 180, 0), 0.5f).OnComplete(delegate
                 {
-                    if (Slot_Image) Slot_Image.sprite = Flip_Sprite;
-                    if (MainSlot_Object) MainSlot_Object.SetActive(false);
-                    if (MainFlipObject) MainFlipObject.SetActive(true);
-                    if (LinesText_Transform) LinesText_Transform.localEulerAngles = new Vector3(0, 180, 0);
-                    if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 180, 0), 0.5f).OnComplete(delegate
-                    {
-                        if (BG_Transform) BG_Transform.DOScale(Vector3.one, 0.4f);
-                    });
-
+                    if (BG_Transform) BG_Transform.DOScale(Vector3.one, 0.4f);
                 });
+
             });
-            if (Slot_Transform) Slot_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.4f).OnComplete(delegate
+            if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
             {
-                if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
+                if (FlipButtonBG_Transform) FlipButtonBG_Transform.gameObject.SetActive(true);
+                if (FlipButtonBG_Transform) FlipButtonBG_Transform.DOLocalMoveX(669, 0.5f);
+                if (ButtonBG_Transform) ButtonBG_Transform.DOLocalMoveX(-1900, 0.5f).OnComplete(delegate { if (ButtonBG_Transform) ButtonBG_Transform.gameObject.SetActive(false); });
+                if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 180, 0), 0.5f).OnComplete(delegate
                 {
-                    if (FlipButtonBG_Transform) FlipButtonBG_Transform.gameObject.SetActive(true);
-                    if (FlipButtonBG_Transform) FlipButtonBG_Transform.DOLocalMoveX(669, 0.5f);
-                    if (ButtonBG_Transform) ButtonBG_Transform.DOLocalMoveX(-1900, 0.5f).OnComplete(delegate { if (ButtonBG_Transform) ButtonBG_Transform.gameObject.SetActive(false); });
-                    if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 180, 0), 0.5f).OnComplete(delegate
-                    {
-                        if (Slot_Transform) Slot_Transform.DOScale(Vector3.one, 0.4f);
-                    });
-
+                    if (Slot_Transform) Slot_Transform.DOScale(Vector3.one, 0.4f);
                 });
+
             });
             if (NormalBG_Image) NormalBG_Image.DOFade(0f, 1f).OnComplete(delegate { NormalBG_Image.gameObject.SetActive(false); });
             if (ZeusTitle_Image) ZeusTitle_Image.DOFade(0f, 1f);
@@ -528,6 +547,12 @@ public class UIManager : MonoBehaviour
                     if (MainSlot_Object) MainSlot_Object.SetActive(true);
                     if (MainFlipObject) MainFlipObject.SetActive(false);
                     if (LinesText_Transform) LinesText_Transform.localEulerAngles = new Vector3(0, 0, 0);
+                    if (GreenLinesText_Transform) GreenLinesText_Transform.localEulerAngles = new Vector3(0, 0, 0);
+                    if (YellowLinesText_Transform) YellowLinesText_Transform.localEulerAngles = new Vector3(0, 0, 0);
+                    if (PurpleLinesText_Transform) PurpleLinesText_Transform.localEulerAngles = new Vector3(0, 0, 0);
+                    if (RedLinesText_Transform) RedLinesText_Transform.localEulerAngles = new Vector3(0, 0, 0);
+                    if (WinLinesEnable_Transform) WinLinesEnable_Transform.localEulerAngles = new Vector3(0, 0, 0);
+                    if (WinLinesDisable_Transform) WinLinesDisable_Transform.localEulerAngles = new Vector3(0, 0, 0);
                     if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 0, 0), 0.5f).OnComplete(delegate
                     {
                         if (BG_Transform) BG_Transform.DOScale(Vector3.one, 0.4f);

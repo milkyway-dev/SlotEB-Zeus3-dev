@@ -159,7 +159,6 @@ public class SocketIOManager : MonoBehaviour
         this.manager.Socket.On<bool>("socketState", OnSocketState);
         this.manager.Socket.On<string>("internalError", OnSocketError);
         this.manager.Socket.On<string>("alert", OnSocketAlert);
-        this.manager.Socket.On<string>("AnotherDevice", OnSocketOtherDevice);
         // Start connecting to the server
     }
 
@@ -213,12 +212,6 @@ public class SocketIOManager : MonoBehaviour
     private void OnSocketAlert(string data)
     {
         Debug.Log("Received alert with data: " + data);
-    }
-
-    private void OnSocketOtherDevice(string data)
-    {
-        Debug.Log("Received Device Error with data: " + data);
-        uiManager.ADfunction();
     }
 
     private void SendPing()
@@ -449,16 +442,21 @@ public class InitData
 public class GameData
 {
     public List<List<int>> linesApiData { get; set; }
-    public List<double> Bets { get; set; }
+    public double baseBet { get; set; }
+    public List<string> betMultiplier { get; set; }
     public List<List<string>> ResultReel { get; set; }
     public List<int> linesToEmit { get; set; }
     public List<List<string>> symbolsToEmit { get; set; }
     public double WinAmout { get; set; }
     public List<string> FinalsymbolsToEmit { get; set; }
     public List<string> FinalResultReel { get; set; }
-    public FreeSpin freeSpin { get; set; }
+    public bool isFreeSpin { get; set; }
+    public int freeSpinCount { get; set; }
+    public bool freeSpinAdded { get; set; }
     public BonusData bonusData { get; set; }
     public List<string> scatterWinningSymbols { get; set; }
+    public List<List<int>> matchCountofLines { get; set; }
+    public List<int> wildSymbolIndices { get; set; }
 }
 
 [Serializable]
@@ -469,13 +467,6 @@ public class BonusData
     public List<int> shuffledBonusValues { get; set; }
     public int selectedBonusMultiplier { get; set; }
     public List<string> trashForCashWinningSymbols { get; set; }
-}
-
-[Serializable]
-public class FreeSpin
-{
-    public bool isNewAdded { get; set; }
-    public int freeSpinCount { get; set; }
 }
 
 [Serializable]

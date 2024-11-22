@@ -228,7 +228,7 @@ TextureImporter:
         width: 1416
         height: 292
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,6 +236,69 @@ TextureImporter:
       bones: []
       spriteID: d77e1d827e48b4a27922e6872e3dd1c3
       internalID: 1924495263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wildreelBorder
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 1717
+        width: 386
+        height: 941
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7308af08734a74ebabf2907e2144d629
+      internalID: 744186732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenBar
+      rect:
+        serializedVersion: 2
+        x: 2435
+        y: 1506
+        width: 165
+        height: 484
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c1f613d9f29d42129eab09fa245af24
+      internalID: 871694612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: YellowBar
+      rect:
+        serializedVersion: 2
+        x: 2763
+        y: 1512
+        width: 170
+        height: 483
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8c49d352116a4a28b5dd41c567cc771
+      internalID: -568019842
       vertices: []
       indices: 
       edges: []
@@ -252,10 +315,13 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       FlipBG: 1924495263
+      GreenBar: 871694612
       PaytableBG: -1298696042
       ReelFeature: 84515875
       SymbolBG: 505730101
       VerticalBG: -640262112
+      YellowBar: -568019842
+      wildreelBorder: 744186732
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
