@@ -257,7 +257,7 @@ public class UIManager : MonoBehaviour
         if (SlotStart_Button) SlotStart_Button.interactable = toggle;
         if (BetMinus_Button) BetMinus_Button.interactable = toggle;
         if (BetPlus_Button) BetPlus_Button.interactable = toggle;
-        if (Settings_Button) Settings_Button.interactable = toggle;
+        if (Info_button) Info_button.interactable = toggle;
     }
 
     internal void ToggleStartButton(bool toggy)
