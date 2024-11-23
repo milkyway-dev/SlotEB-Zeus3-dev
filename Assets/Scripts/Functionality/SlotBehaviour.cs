@@ -662,12 +662,12 @@ public class SlotBehaviour : MonoBehaviour
         if (SocketManager.resultData.freeSpinAdded || SocketManager.resultData.isFreeSpin)
         {
             FreeSpinCounter = SocketManager.resultData.freeSpinCount;
-            if (IsFreeSpin)
+            if (SocketManager.resultData.freeSpinAdded)
             {
                 uiManager.UpdateUI(FreeSpinCounter, 0);
                 uiManager.ExtraFSPopup(FreeSpinCounter);
             }
-            else
+            else if(!IsFreeSpin)
             {
                 if (SocketManager.resultData.linesToEmit.Count > 0)
                 {
