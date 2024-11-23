@@ -839,6 +839,7 @@ public class SlotBehaviour : MonoBehaviour
 
     void ToggleButtonGrp(bool toggle)
     {
+        if (AutoSpin_Button) AutoSpin_Button.interactable = toggle;
         if (uiManager) uiManager.ToggleButtonGrp(toggle);
     }
 
