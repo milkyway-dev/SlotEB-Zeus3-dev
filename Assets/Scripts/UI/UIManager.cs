@@ -321,7 +321,7 @@ public class UIManager : MonoBehaviour
             if (Star_Object) Star_Object.SetActive(true);
             DOTween.To(() => initAmount, (val) => initAmount = val, amount, 5f).OnUpdate(() =>
             {
-                if (BigWin_Text) BigWin_Text.text = initAmount.ToString("f2");
+                if (BigWin_Text) BigWin_Text.text = initAmount.ToString("f3");
             }).OnComplete(delegate
             {
                 DOVirtual.DelayedCall(2f, () =>
