@@ -365,10 +365,6 @@ public class UIManager : MonoBehaviour
             {
                 text += "\n" + paylines.symbols[i].Multiplier[2][0];
             }
-            if (paylines.symbols[i].Multiplier[3][0] != 0)
-            {
-                text += "\n" + paylines.symbols[i].Multiplier[3][0];
-            }
             if (SymbolsText[i]) SymbolsText[i].text = text;
         }
 

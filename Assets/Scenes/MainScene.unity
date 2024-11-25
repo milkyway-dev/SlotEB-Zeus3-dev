@@ -5870,9 +5870,7 @@ MonoBehaviour:
 
     5=
 
-    4=
-
-    3='
+    4='
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
   m_sharedMaterial: {fileID: -4927255690873190338, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
@@ -5911,7 +5909,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -10241,9 +10239,7 @@ MonoBehaviour:
 
     0.50
 
-    0.08
-
-    0.03'
+    0.08'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
   m_sharedMaterial: {fileID: -3078607122032067499, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
@@ -10282,7 +10278,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -13234,9 +13230,7 @@ MonoBehaviour:
 
     5=
 
-    4=
-
-    3='
+    4='
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
   m_sharedMaterial: {fileID: -4927255690873190338, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
@@ -13275,7 +13269,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -13374,9 +13368,7 @@ MonoBehaviour:
 
     0.50
 
-    0.08
-
-    0.03'
+    0.08'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
   m_sharedMaterial: {fileID: -3078607122032067499, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
@@ -13415,7 +13407,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -14145,9 +14137,7 @@ MonoBehaviour:
 
     0.50
 
-    0.08
-
-    0.03'
+    0.08'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
   m_sharedMaterial: {fileID: -3078607122032067499, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
@@ -14186,7 +14176,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -21358,9 +21348,7 @@ MonoBehaviour:
 
     5=
 
-    4=
-
-    3='
+    4='
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
   m_sharedMaterial: {fileID: -4927255690873190338, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
@@ -21399,7 +21387,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -22134,7 +22122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotManager: {fileID: 2046803210}
   uiManager: {fileID: 377874625}
-  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDgzY2E2YTI3YmY5MDI0NDNlYjQ5NSIsInVzZXJuYW1lIjoiZWthbnNoIiwicm9sZSI6InBsYXllciIsImlhdCI6MTczMjM0NzYyMiwiZXhwIjoxNzMyOTUyNDIyfQ.ccr2Hh82CZqyGgLgLFdfeou6hdKsHLJhuBXgVqjiIjc
+  testToken: 
 --- !u!1 &501411899
 GameObject:
   m_ObjectHideFlags: 0
@@ -27287,9 +27275,7 @@ MonoBehaviour:
 
     5=
 
-    4=
-
-    3='
+    4='
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
   m_sharedMaterial: {fileID: -4927255690873190338, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
@@ -27328,7 +27314,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -31306,9 +31292,7 @@ MonoBehaviour:
 
     0.50
 
-    0.08
-
-    0.03'
+    0.08'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
   m_sharedMaterial: {fileID: -3078607122032067499, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
@@ -31347,7 +31331,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -35769,9 +35753,7 @@ MonoBehaviour:
 
     5=
 
-    4=
-
-    3='
+    4='
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
   m_sharedMaterial: {fileID: -4927255690873190338, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
@@ -35810,7 +35792,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -36305,9 +36287,7 @@ MonoBehaviour:
 
     0.50
 
-    0.08
-
-    0.03'
+    0.08'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
   m_sharedMaterial: {fileID: -3078607122032067499, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
@@ -36346,7 +36326,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -43268,9 +43248,7 @@ MonoBehaviour:
 
     5=
 
-    4=
-
-    3='
+    4='
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
   m_sharedMaterial: {fileID: -4927255690873190338, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
@@ -43309,7 +43287,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -48772,9 +48750,7 @@ MonoBehaviour:
 
     5=
 
-    4=
-
-    3='
+    4='
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
   m_sharedMaterial: {fileID: -4927255690873190338, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
@@ -48813,7 +48789,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -51919,9 +51895,7 @@ MonoBehaviour:
 
     0.50
 
-    0.08
-
-    0.03'
+    0.08'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
   m_sharedMaterial: {fileID: -3078607122032067499, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
@@ -51960,7 +51934,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -53598,9 +53572,7 @@ MonoBehaviour:
 
     0.50
 
-    0.08
-
-    0.03'
+    0.08'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
   m_sharedMaterial: {fileID: -3078607122032067499, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
@@ -53639,7 +53611,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -56372,9 +56344,7 @@ MonoBehaviour:
 
     5=
 
-    4=
-
-    3='
+    4='
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
   m_sharedMaterial: {fileID: -4927255690873190338, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
@@ -56413,7 +56383,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -63324,9 +63294,7 @@ MonoBehaviour:
 
     0.50
 
-    0.08
-
-    0.03'
+    0.08'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
   m_sharedMaterial: {fileID: -3078607122032067499, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
@@ -63365,7 +63333,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -74667,9 +74635,7 @@ MonoBehaviour:
 
     0.50
 
-    0.08
-
-    0.03'
+    0.08'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
   m_sharedMaterial: {fileID: -3078607122032067499, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
@@ -74708,7 +74674,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -77257,9 +77223,7 @@ MonoBehaviour:
 
     5=
 
-    4=
-
-    3='
+    4='
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
   m_sharedMaterial: {fileID: -4927255690873190338, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
@@ -77298,7 +77262,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -80597,9 +80561,7 @@ MonoBehaviour:
 
     5=
 
-    4=
-
-    3='
+    4='
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
   m_sharedMaterial: {fileID: -4927255690873190338, guid: 502d12e0455c74845a0cbde92b874d6a, type: 2}
@@ -80638,7 +80600,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -90886,9 +90848,7 @@ MonoBehaviour:
 
     0.50
 
-    0.08
-
-    0.03'
+    0.08'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
   m_sharedMaterial: {fileID: -3078607122032067499, guid: c9f8cc79162bc4a3c9229dd419bc638d, type: 2}
@@ -90927,7 +90887,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 40
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
