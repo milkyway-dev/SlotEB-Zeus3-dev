@@ -508,7 +508,7 @@ public class Symbol
 
     // This property will hold the properly deserialized list of lists of integers
     [JsonIgnore]
-    public List<List<int>> Multiplier { get; private set; }
+    public List<List<double>> Multiplier { get; private set; }
 
     // Custom deserialization method to handle the conversion
     [OnDeserialized]
@@ -517,25 +517,25 @@ public class Symbol
         if (MultiplierObject == null)
         {
             // If the multiplier is null in the JSON, set an empty list
-            Multiplier = new List<List<int>>();
+            Multiplier = new List<List<double>>();
         }
         else if (MultiplierObject is JObject)
         {
             // If the multiplier is an empty object ({}), treat it as an empty list
-            Multiplier = new List<List<int>>();
+            Multiplier = new List<List<double>>();
         }
         else
         {
             try
             {
                 // Attempt to deserialize the multiplier object as a list of lists of integers
-                Multiplier = JsonConvert.DeserializeObject<List<List<int>>>(MultiplierObject.ToString());
+                Multiplier = JsonConvert.DeserializeObject<List<List<double>>>(MultiplierObject.ToString());
             }
             catch (Exception ex)
             {
                 // Handle unexpected format or deserialization errors
                 Debug.Log($"Deserialization error: {ex.Message}");
-                Multiplier = new List<List<int>>(); // Fallback to an empty list on error
+                Multiplier = new List<List<double>>(); // Fallback to an empty list on error
             }
         }
     }
