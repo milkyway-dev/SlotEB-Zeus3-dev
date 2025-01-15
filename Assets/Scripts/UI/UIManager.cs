@@ -149,6 +149,8 @@ public class UIManager : MonoBehaviour
     private Image ZeusTitle_Image;
     [SerializeField]
     private Image ZeusFlip_Image;
+    [SerializeField]
+    private Button SkipWinAnimation;
     private bool isFlip = false;
 
     [Header("Quit Popup")]
@@ -176,6 +178,9 @@ public class UIManager : MonoBehaviour
     private bool isMusic = true;
     private bool isSound = true;
     private bool isExit = false;
+
+    private Tween WinPopupTextTween;
+    private Tween ClosePopupTween;
 
     private void Start()
     {
@@ -240,6 +245,27 @@ public class UIManager : MonoBehaviour
 
         if (Music_Button) Music_Button.onClick.RemoveAllListeners();
         if (Music_Button) Music_Button.onClick.AddListener(ToggleMusic);
+
+        if (SkipWinAnimation) SkipWinAnimation.onClick.RemoveAllListeners();
+        if (SkipWinAnimation) SkipWinAnimation.onClick.AddListener(SkipWin);
+    }
+
+    void SkipWin()
+    {
+        Debug.Log("Skip win called");
+        if (ClosePopupTween != null)
+        {
+            ClosePopupTween.Kill();
+            ClosePopupTween = null;
+        }
+        if (WinPopupTextTween != null)
+        {
+            WinPopupTextTween.Kill();
+            WinPopupTextTween = null;
+        }
+        //ClosePopup(BigWinPopup_Object);
+        BigWinPopup_Object.SetActive(false);
+        slotManager.CheckPopups = false;
     }
 
     private void StartSlots()
@@ -463,7 +489,7 @@ public class UIManager : MonoBehaviour
         if (ExtraFS_Text) ExtraFS_Text.text = "you have been awarded with extra free spins. total free spins left <color=yellow>" + freespincount + "</color>.";
         if (ExtraFSPanel_Object) ExtraFSPanel_Object.SetActive(true);
         if (ExtraFSPopup_Transform) ExtraFS_Tween = ExtraFSPopup_Transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.5f).SetLoops(-1, LoopType.Yoyo);
-        DOVirtual.DelayedCall(9f, () =>
+        DOVirtual.DelayedCall(2f, () =>
         {
             ExtraFS_Tween.Kill();
             if (ExtraFSPopup_Transform) ExtraFSPopup_Transform.localScale = Vector3.one;
@@ -547,6 +573,8 @@ public class UIManager : MonoBehaviour
             if (NormalBG_Image) NormalBG_Image.DOFade(0f, 1f).OnComplete(delegate { NormalBG_Image.gameObject.SetActive(false); });
             if (ZeusTitle_Image) ZeusTitle_Image.DOFade(0f, 1f);
             if (ZeusFlip_Image) ZeusFlip_Image.DOFade(1f, 1f);
+
+            //slotManager.StopSpin_Button.GetComponent<ImageAnimation>().StopAnimation();
         }
         else
         {
@@ -577,6 +605,8 @@ public class UIManager : MonoBehaviour
                 if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
                 {
                     if (ButtonBG_Transform) ButtonBG_Transform.gameObject.SetActive(true);
+
+
                     if (ButtonBG_Transform) ButtonBG_Transform.DOLocalMoveX(-489, 0.5f);
                     if (FlipButtonBG_Transform) FlipButtonBG_Transform.DOLocalMoveX(1900, 0.5f).OnComplete(delegate { if (FlipButtonBG_Transform) FlipButtonBG_Transform.gameObject.SetActive(false); });
                     if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 0, 0), 0.5f).OnComplete(delegate
@@ -590,6 +620,11 @@ public class UIManager : MonoBehaviour
             if (NormalBG_Image) NormalBG_Image.DOFade(1f, 1f);
             if (ZeusTitle_Image) ZeusTitle_Image.DOFade(1f, 1f);
             if (ZeusFlip_Image) ZeusFlip_Image.DOFade(0f, 1f);
+
+            //if (slotManager.WasAutoSpinOn)
+            //{
+            //    slotManager.StopSpin_Button.GetComponent<ImageAnimation>().StartAnimation();
+            //}
         }
     }
 
