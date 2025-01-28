@@ -318,7 +318,7 @@ public class SlotBehaviour : MonoBehaviour
         BetCounter = 0;
         if (LineBet_text) LineBet_text.text = SocketManager.initialData.betMultiplier[BetCounter].ToString();
         if (TotalBet_text) TotalBet_text.text = (double.Parse(SocketManager.initialData.betMultiplier[BetCounter]) * SocketManager.initialData.baseBet).ToString();
-        if (TotalWin_text) TotalWin_text.text = "0.00";
+        if (TotalWin_text) TotalWin_text.text = "0.000";
         if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("F3");
         currentBalance = SocketManager.playerdata.Balance;
         currentTotalBet = double.Parse(SocketManager.initialData.betMultiplier[BetCounter]) * SocketManager.initialData.baseBet;
@@ -865,7 +865,7 @@ public class SlotBehaviour : MonoBehaviour
 
     internal void CheckWinPopups()
     {
-        if (TotalWin_text) TotalWin_text.text = SocketManager.playerdata.currentWining.ToString();
+        if (TotalWin_text) TotalWin_text.text = SocketManager.playerdata.currentWining.ToString("f3");
         if (SocketManager.playerdata.currentWining >= currentTotalBet * 10)
         {
             uiManager.BigWinSequence(SocketManager.playerdata.currentWining);

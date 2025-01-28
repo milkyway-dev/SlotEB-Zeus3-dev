@@ -168,6 +168,11 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Button GameExit_Button;
+    [SerializeField]
+    private TMP_Text PayLines_text;
+    [SerializeField]
+    private TMP_Text PayLines_textTwo;
+
 
     [SerializeField]
     private SlotBehaviour slotManager;
@@ -345,7 +350,7 @@ public class UIManager : MonoBehaviour
         if (BigWin_Transform) BigWin_Transform.DOLocalMoveY(190, 0.3f).OnComplete(delegate
         {
             if (Star_Object) Star_Object.SetActive(true);
-            DOTween.To(() => initAmount, (val) => initAmount = val, amount, 5f).OnUpdate(() =>
+            DOTween.To(() => initAmount, (val) => initAmount = val, amount, 3f).OnUpdate(() =>
             {
                 if (BigWin_Text) BigWin_Text.text = initAmount.ToString("f3");
             }).OnComplete(delegate
@@ -376,22 +381,24 @@ public class UIManager : MonoBehaviour
 
     private void PopulateSymbolsPayout(Paylines paylines)
     {
+        PayLines_text.text = socketManager.initialData.linesApiData.Count.ToString()+"\nLines";
+        PayLines_textTwo.text = socketManager.initialData.linesApiData.Count.ToString();
         for (int i = 0; i < SymbolsText.Length; i++)
         {
             string text = null;
             if (paylines.symbols[i].Multiplier[0][0] != 0)
             {
-                text += paylines.symbols[i].Multiplier[0][0];
+                text += paylines.symbols[i].Multiplier[0][0]+"x";
             }
             if (paylines.symbols[i].Multiplier[1][0] != 0)
             {
-                text += "\n" + paylines.symbols[i].Multiplier[1][0];
+                text += "\n" + paylines.symbols[i].Multiplier[1][0] + "x"; ;
             }
             if (paylines.symbols[i].Multiplier[2][0] != 0)
             {
                 text += "\n" + paylines.symbols[i].Multiplier[2][0];
             }
-            if (SymbolsText[i]) SymbolsText[i].text = text;
+            if (SymbolsText[i]) SymbolsText[i].text = text + "x"; ;
         }
 
         for (int i = 0; i < paylines.symbols.Count; i++)
@@ -521,7 +528,7 @@ public class UIManager : MonoBehaviour
     {
         if (FSRemaining_text) FSRemaining_text.text = count.ToString();
         freespinWin += winning; 
-        if (FSTotalwin_text) FSTotalwin_text.text = freespinWin.ToString();
+        if (FSTotalwin_text) FSTotalwin_text.text = freespinWin.ToString("f3");
         if (FSInfo_text) FSInfo_text.text = count + " Free spins remaining";
     }
 
@@ -541,7 +548,7 @@ public class UIManager : MonoBehaviour
         if (!isFlip)
         {
             isFlip = true;
-            if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
+            if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.3f).SetEase(Ease.Linear).OnComplete(delegate
             {
                 if (Slot_Image) Slot_Image.sprite = Flip_Sprite;
                 if (MainSlot_Object) MainSlot_Object.SetActive(false);
@@ -559,14 +566,14 @@ public class UIManager : MonoBehaviour
                 });
 
             });
-            if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
+            if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.3f).SetEase(Ease.Linear).OnComplete(delegate
             {
                 if (FlipButtonBG_Transform) FlipButtonBG_Transform.gameObject.SetActive(true);
                 if (FlipButtonBG_Transform) FlipButtonBG_Transform.DOLocalMoveX(669, 0.5f);
                 if (ButtonBG_Transform) ButtonBG_Transform.DOLocalMoveX(-1900, 0.5f).OnComplete(delegate { if (ButtonBG_Transform) ButtonBG_Transform.gameObject.SetActive(false); });
                 if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 180, 0), 0.5f).OnComplete(delegate
                 {
-                    if (Slot_Transform) Slot_Transform.DOScale(Vector3.one, 0.4f);
+                    if (Slot_Transform) Slot_Transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.Linear);
                 });
 
             });
@@ -579,9 +586,9 @@ public class UIManager : MonoBehaviour
         else
         {
             isFlip = false;
-            if (BG_Transform) BG_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.4f).OnComplete(delegate
+            if (BG_Transform) BG_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f).SetEase(Ease.Linear).OnComplete(delegate
             {
-                if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
+                if (BG_Transform) BG_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.3f).SetEase(Ease.Linear).OnComplete(delegate
                 {
                     if (Slot_Image) Slot_Image.sprite = Normal_Sprite;
                     if (MainSlot_Object) MainSlot_Object.SetActive(true);
@@ -600,9 +607,9 @@ public class UIManager : MonoBehaviour
 
                 });
             });
-            if (Slot_Transform) Slot_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.4f).OnComplete(delegate
+            if (Slot_Transform) Slot_Transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.3f).SetEase(Ease.Linear).OnComplete(delegate
             {
-                if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.5f).OnComplete(delegate
+                if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 90, 0), 0.3f).SetEase(Ease.Linear).OnComplete(delegate
                 {
                     if (ButtonBG_Transform) ButtonBG_Transform.gameObject.SetActive(true);
 
@@ -611,7 +618,7 @@ public class UIManager : MonoBehaviour
                     if (FlipButtonBG_Transform) FlipButtonBG_Transform.DOLocalMoveX(1900, 0.5f).OnComplete(delegate { if (FlipButtonBG_Transform) FlipButtonBG_Transform.gameObject.SetActive(false); });
                     if (Slot_Transform) Slot_Transform.DOLocalRotate(new Vector3(0, 0, 0), 0.5f).OnComplete(delegate
                     {
-                        if (Slot_Transform) Slot_Transform.DOScale(Vector3.one, 0.4f);
+                        if (Slot_Transform) Slot_Transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.Linear);
                     });
 
                 });
