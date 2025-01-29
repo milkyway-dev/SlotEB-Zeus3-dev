@@ -184,6 +184,7 @@ public class SlotBehaviour : MonoBehaviour
 
     private void CompareBalance()
     {
+       
         if (currentBalance < currentTotalBet)
         {
             uiManager.LowBalPopup();
@@ -229,7 +230,7 @@ public class SlotBehaviour : MonoBehaviour
         if (TotalBet_text) TotalBet_text.text = (double.Parse(SocketManager.initialData.betMultiplier[BetCounter]) * SocketManager.initialData.baseBet).ToString();
         currentTotalBet = double.Parse(SocketManager.initialData.betMultiplier[BetCounter]) * SocketManager.initialData.baseBet;
         if (Info_text) Info_text.text = SocketManager.initialData.baseBet + " base bet x " + SocketManager.initialData.betMultiplier[BetCounter] + " bet multiplier = " + currentTotalBet + " total bet";
-        CompareBalance();
+        
     }
 
     #region InitialFunctions
@@ -507,6 +508,7 @@ public class SlotBehaviour : MonoBehaviour
     //starts the spin process
     internal void StartSlots(bool autoSpin = false)
     {
+        
         if (audioController) audioController.PlaySpinButtonAudio();
 
         if (!autoSpin)
