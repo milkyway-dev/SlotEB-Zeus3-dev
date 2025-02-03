@@ -476,6 +476,7 @@ public class UIManager : MonoBehaviour
 
     private void ToggleMusic()
     {
+        if (audioController) audioController.PlaySpinButtonAudio();
         isMusic = !isMusic;
         if (isMusic)
         {
@@ -623,6 +624,7 @@ public class UIManager : MonoBehaviour
 
                 });
             });
+            
             if (NormalBG_Image) NormalBG_Image.gameObject.SetActive(true);
             if (NormalBG_Image) NormalBG_Image.DOFade(1f, 1f);
             if (ZeusTitle_Image) ZeusTitle_Image.DOFade(1f, 1f);
@@ -638,6 +640,7 @@ public class UIManager : MonoBehaviour
     private void ToggleSound()
     {
         isSound = !isSound;
+        if (audioController) audioController.PlaySpinButtonAudio();
         if (isSound)
         {
             if (SoundOn_Object) SoundOn_Object.SetActive(true);
