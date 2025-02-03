@@ -19,7 +19,9 @@ public class SlotBehaviour : MonoBehaviour
     [SerializeField]
     private List<SlotImage> images;     //class to store total images
     [SerializeField]
-    private List<SlotImage> FSimages;     //class to store FS total images
+    private List<SlotImage> FSimages;   //class to store FS total images
+    [SerializeField]
+    private List<SlotImage> placeHolderImages;
 
     [Header("Slots Transforms")]
     [SerializeField]
@@ -121,7 +123,7 @@ public class SlotBehaviour : MonoBehaviour
     private Tweener WinTween = null;
 
     [SerializeField]
-    private List<ImageAnimation> TempList;  //stores the sprites whose animation is running at present 
+    internal List<ImageAnimation> TempList;  //stores the sprites whose animation is running at present 
 
     [SerializeField]
     private SocketIOManager SocketManager;
@@ -156,10 +158,10 @@ public class SlotBehaviour : MonoBehaviour
 
 
         if (AutoSpinStop_Button) AutoSpinStop_Button.onClick.RemoveAllListeners();
-        if (AutoSpinStop_Button) AutoSpinStop_Button.onClick.AddListener(StopAutoSpin);
+        if (AutoSpinStop_Button) AutoSpinStop_Button.onClick.AddListener(() => { WasAutoSpinOn=false; StopAutoSpin(); });
 
         if (StopSpin_Button) StopSpin_Button.onClick.RemoveAllListeners();
-        if (StopSpin_Button) StopSpin_Button.onClick.AddListener(() => { StopSpinToggle = true; StopSpin_Button.gameObject.SetActive(false); audioController.PlayButtonAudio(); });
+        if (StopSpin_Button) StopSpin_Button.onClick.AddListener(() => { StopSpinToggle = true;StopSpin_Button.gameObject.SetActive(false); audioController.PlayButtonAudio(); });
 
         if (Turbo_Button) Turbo_Button.onClick.RemoveAllListeners();
         if (Turbo_Button) Turbo_Button.onClick.AddListener(() => { TurboToggle(); audioController.PlayButtonAudio(); });
@@ -201,6 +203,8 @@ public class SlotBehaviour : MonoBehaviour
     #endregion
 
 
+    
+
     internal void ChangeBet(bool IncDec)
     {
         if (audioController) audioController.PlayButtonAudio();
@@ -234,41 +238,83 @@ public class SlotBehaviour : MonoBehaviour
     }
 
     #region InitialFunctions
-    internal void shuffleInitialMatrix()
+    internal void shuffleInitialMatrix(bool initialShuffle)
     {
-        for (int i = 0; i < images.Count; i++)
+        if (initialShuffle)
         {
-            for (int j = 0; j < 5; j++)
+            for (int i = 0; i < images.Count; i++)
             {
-                int randomIndex = UnityEngine.Random.Range(0, 11);
-                images[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().sprite = myImages[randomIndex];
-                if (randomIndex == 5)
+                for (int j = 0; j < 5; j++)
                 {
-                    images[i].slotImages[j].transform.GetChild(0).gameObject.SetActive(true);
+                    int randomIndex = UnityEngine.Random.Range(0, 11);
+                    images[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().sprite = myImages[randomIndex];
+                    if (randomIndex == 5)
+                    {
+                        images[i].slotImages[j].transform.GetChild(0).gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        images[i].slotImages[j].transform.GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (randomIndex == 0 || randomIndex == 10)
+                    {
+                        images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2(-10.205f, -39.6f);
+                        images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMax = new Vector2(10.205f, 39.6f);
+                        images[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().preserveAspect = false;
+                        images[i].slotImages[j].transform.SetAsLastSibling();
+                    }
+                    else if (randomIndex == 11)
+                    {
+                        images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2(-47.5f, -55.555f);
+                        images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMax = new Vector2(73.5f, 55.555f);
+                        images[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().preserveAspect = true;
+                        images[i].slotImages[j].transform.SetAsLastSibling();
+                    }
+                    else
+                    {
+                        images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+                        images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+                        images[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().preserveAspect = true;
+                    }
                 }
-                else
+            }
+        }
+        else
+        {
+            for (int i = 0; i < placeHolderImages.Count; i++)
+            {
+                for (int j = 0; j < 2; j++)
                 {
-                    images[i].slotImages[j].transform.GetChild(0).gameObject.SetActive(false);
-                }
-                if (randomIndex == 0 || randomIndex == 10)
-                {
-                    images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2(-10.205f, -39.6f);
-                    images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMax = new Vector2(10.205f, 39.6f);
-                    images[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().preserveAspect = false;
-                    images[i].slotImages[j].transform.SetAsLastSibling();
-                }
-                else if (randomIndex == 11)
-                {
-                    images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2(-47.5f, -55.555f);
-                    images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMax = new Vector2(73.5f, 55.555f);
-                    images[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().preserveAspect = true;
-                    images[i].slotImages[j].transform.SetAsLastSibling();
-                }
-                else
-                {
-                    images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
-                    images[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
-                    images[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().preserveAspect = true;
+                    int randomIndex = UnityEngine.Random.Range(0, 11);
+                    placeHolderImages[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().sprite = myImages[randomIndex];
+                    if (randomIndex == 5)
+                    {
+                        placeHolderImages[i].slotImages[j].transform.GetChild(0).gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        placeHolderImages[i].slotImages[j].transform.GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (randomIndex == 0 || randomIndex == 10)
+                    {
+                        placeHolderImages[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2(-10.205f, -39.6f);
+                        placeHolderImages[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMax = new Vector2(10.205f, 39.6f);
+                        placeHolderImages[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().preserveAspect = false;
+                        placeHolderImages[i].slotImages[j].transform.SetAsLastSibling();
+                    }
+                    else if (randomIndex == 11)
+                    {
+                        placeHolderImages[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2(-47.5f, -55.555f);
+                        placeHolderImages[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMax = new Vector2(73.5f, 55.555f);
+                        placeHolderImages[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().preserveAspect = true;
+                        placeHolderImages[i].slotImages[j].transform.SetAsLastSibling();
+                    }
+                    else
+                    {
+                        placeHolderImages[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+                        placeHolderImages[i].slotImages[j].transform.GetChild(1).GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+                        placeHolderImages[i].slotImages[j].transform.GetChild(1).GetComponent<Image>().preserveAspect = true;
+                    }
                 }
             }
         }
@@ -436,11 +482,14 @@ public class SlotBehaviour : MonoBehaviour
         if (IsAutoSpin)
         {
             IsAutoSpin = false;
+           
             if (AutoSpinStop_Button) AutoSpinStop_Button.gameObject.SetActive(false);
             if (AutoSpin_Button) AutoSpin_Button.gameObject.SetActive(true);
             StartCoroutine(StopAutoSpinCoroutine());
         }
     }
+
+    
 
     private IEnumerator AutoSpinCoroutine()
     {
@@ -558,6 +607,7 @@ public class SlotBehaviour : MonoBehaviour
             ToggleButtonGrp(true);
             yield break;
         }
+
         if(IsFreeSpin)
         {
             FreeSpinCounter--;
@@ -593,6 +643,7 @@ public class SlotBehaviour : MonoBehaviour
         {
             BalanceDeduction();
         }
+        shuffleInitialMatrix(false);
         SocketManager.AccumulateResult(BetCounter);
 
         yield return new WaitUntil(() => SocketManager.isResultdone);
@@ -782,6 +833,7 @@ public class SlotBehaviour : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
         }
+        
         if (IsFreeSpin && FreeSpinCounter <= 0)
         {
             IsFreeSpin = false;
@@ -797,6 +849,7 @@ public class SlotBehaviour : MonoBehaviour
         else
         {
             yield return new WaitForSecondsRealtime(1);
+            Debug.Log(IsAutoSpin +" " + IsFreeSpin +" "+ WasAutoSpinOn);
             if (IsAutoSpin || IsFreeSpin || WasAutoSpinOn)
                 ToggleButtonGrp(false);
             else

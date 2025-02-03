@@ -11745,7 +11745,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -203, y: -1}
+  m_AnchoredPosition: {x: -200.2, y: -1}
   m_SizeDelta: {x: 144.8, y: 92.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &263602035
@@ -22124,7 +22124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotManager: {fileID: 2046803210}
   uiManager: {fileID: 377874625}
-  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2JhM2QzOTgxYmU0MzlkMjkyYzgzYSIsInVzZXJuYW1lIjoiTWVldCIsInJvbGUiOiJwbGF5ZXIiLCJpYXQiOjE3Mzc2MzE3NjgsImV4cCI6MTczODIzNjU2OH0.6kyil-J8NmNDb3US8QevBjtVgFQ4DLsnru1NMtSyijI
+  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2JhM2QzOTgxYmU0MzlkMjkyYzgzYSIsInVzZXJuYW1lIjoiTWVldCIsInJvbGUiOiJwbGF5ZXIiLCJpYXQiOjE3MzgzMDAxNjcsImV4cCI6MTczODkwNDk2N30.oggq2kNh8PmYQvF0aLTNKLBTdraqpLSArWrS9yzqlEY
 --- !u!1 &501411899
 GameObject:
   m_ObjectHideFlags: 0
@@ -24842,7 +24842,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.4764151, b: 0.89646626, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -30456,7 +30456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1041, y: 80}
+  m_AnchoredPosition: {x: -1041, y: 81.8}
   m_SizeDelta: {x: 105.56, y: 59.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &687962613
@@ -37385,7 +37385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 40
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cc2189936e4e94d51a51a5ef3ec2e877, type: 2}
   m_sharedMaterial: {fileID: 9200403621219146704, guid: cc2189936e4e94d51a51a5ef3ec2e877, type: 2}
@@ -56224,7 +56224,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -217.8, y: -63.93}
+  m_AnchoredPosition: {x: -217.8, y: -69.6}
   m_SizeDelta: {x: 251.19, y: 92.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1337110640
@@ -65973,7 +65973,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 13.83}
+  m_AnchoredPosition: {x: 0, y: 19}
   m_SizeDelta: {x: 1741.32, y: 947.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1544935813
@@ -87647,6 +87647,25 @@ MonoBehaviour:
     - {fileID: 843698663}
     - {fileID: 601715154}
     - {fileID: 1169358428}
+  placeHolderImages:
+  - slotImages:
+    - {fileID: 521323381}
+    - {fileID: 507061756}
+  - slotImages:
+    - {fileID: 269599107}
+    - {fileID: 635839451}
+  - slotImages:
+    - {fileID: 1591788505}
+    - {fileID: 1053865450}
+  - slotImages:
+    - {fileID: 519420170}
+    - {fileID: 295209198}
+  - slotImages:
+    - {fileID: 1010058556}
+    - {fileID: 1755475380}
+  - slotImages:
+    - {fileID: 109238555}
+    - {fileID: 39756851}
   Slot_Transform:
   - {fileID: 1502617188}
   - {fileID: 784128382}
@@ -87821,9 +87840,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fd5c1cf34eba44c9999da1e621c4e122, type: 3}
   - {fileID: 21300000, guid: fd73cc779179c47c89a514967acf3483, type: 3}
   Wild_Sprite:
-  - {fileID: 21300000, guid: 579d898a908524489b24633e0e0b5e6e, type: 3}
-  - {fileID: 21300000, guid: ddaca981d0257449aadd16e51e01b2e8, type: 3}
-  - {fileID: 21300000, guid: d195da2b2a498433990dd08fc7ee092a, type: 3}
   - {fileID: 21300000, guid: 581b2f62f37e043adb8b31dd0ebbf734, type: 3}
   - {fileID: 21300000, guid: d201334b50ab146e4b9e677c2b7dee87, type: 3}
   - {fileID: 21300000, guid: 3402f9d974e8445e6a38f71035de28fb, type: 3}
@@ -87857,6 +87873,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9a3a68fa6592b4d1dbb1f2333ca73b2c, type: 3}
   - {fileID: 21300000, guid: f664616f6e8374ecfa81626736141072, type: 3}
   - {fileID: 21300000, guid: 9d4b4ba7a5c1f46838d3647f7a06fe77, type: 3}
+  - {fileID: 21300000, guid: 579d898a908524489b24633e0e0b5e6e, type: 3}
+  - {fileID: 21300000, guid: ddaca981d0257449aadd16e51e01b2e8, type: 3}
+  - {fileID: 21300000, guid: d195da2b2a498433990dd08fc7ee092a, type: 3}
   Feature_Sprite:
   - {fileID: 21300000, guid: d389908f1970c469ab16574d4a5fd31f, type: 3}
   - {fileID: 21300000, guid: b5884661e0c73491c88c3d9e645473ba, type: 3}
